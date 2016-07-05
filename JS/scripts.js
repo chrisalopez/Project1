@@ -2,31 +2,53 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var context;
-var x = 10;
-var y = 10;
-var dx = 5;
-var dy = 5;
+var x = 50;
+var y = 25;
+var dx = 2;
+var dy = -2;
+var ballRadius = 10;
 
 function init() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw,10);
+  setInterval(draw, 30);
 }
-function draw() {
-// ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
-  context.clearRect(0, 0, 300, 400)
+
+function drawBall() {
 // ctx.beginPath() = This creates a new path. Starts a new path by emptying the list of sub-paths.
   context.beginPath();
-  context.fillStyle = "#8AFF57"
-// ctx.arc (x, y, radius, startAngle, endAngle, anticlockwise); = Draws a CIRCLE!
+// ctx.arc (x, y, radius, startAngle, endAngle, anticlockwise) = DRAWS A CIRCLE!
 // Math.PI = Ratio of the circumference of a circle to its diameter, approximately 3.14159
-  context.arc(x, y, 8, 0, Math.PI * 2, true);
+  context.arc(x, y, ballRadius, 0, Math.PI * 2);
+  context.fillStyle = "#8AFF57";
+  context.fill();
 // ctx.closePath() = causes the point of the pen to move back to the start of the current sub-path aka - beginPath()
   context.closePath();
-  context.fill();
-  x+=dx;
-  y+=dy;
 }
+
+function draw() {
+  // ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
+  context.clearRect(0, 0, 300, 400);
+  drawBall();
+  if (y + dy < ballRadius || y + dy > 395) {
+    dy = -dy;
+   // if (y + dy > 395) {
+   //    window.alert("Hello");
+   //  }
+  };
+  if (x + dx >= 295 || x + dx < ballRadius) {
+    dx = -dx;
+  };
+  x += dx;
+  y += dy;
+}
+
+  // Boundary Logic
+//
+// if (x < 10 || x > 290) dx = -dx;
+// if (y < 10 || y > 390) dy = -dy;
+
+// }
 
 // when the DOM is loaded, run the init function
 $(document).ready(function(){
@@ -38,7 +60,7 @@ button.on('click', function(e){
 // Need to target the canvas
 // Need jQuery to change the background of the canvas
   var bgcanvas = $("#myCanvas")
-  bgcanvas.css("background", "red")
+  bgcanvas.css("background", "#457F2C")
 });
 
 
