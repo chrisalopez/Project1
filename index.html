@@ -2,11 +2,18 @@
 <html>
 <head>
   <title>Pong Game</title>
-  <link rel="stylesheet" type="text/css" href="CSS/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<canvas id="myCanvas"></canvas>
 
-<script src="JS/scripts.js" type="text/javascript" charset="utf-8" async defer></script>
+  <canvas id="myCanvas" width="300px" height="400px"></canvas>
+
+  <script src="https://code.jquery.com/jquery-3.0.0.js" integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" crossorigin="anonymous"></script>
+  <script src="js/scripts.js" type="text/javascript" charset="utf-8" async defer></script>
+  <button type="button" id="colorbutton">Colors!</button>
 </body>
 </html>
+
+<!-- create a button on the bottom of the HTML page so when I click it creates a color in the canvas background -->
+<!-- Create a button in HTML; Give ID to target with jquery; Name ID based on its job -->
+<!-- In JS create a variable; Assign it to HTML ID button using jQuery -->
