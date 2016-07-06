@@ -73,9 +73,14 @@ function draw() {
     dy = -dy;
       // This indicates "Game Over" when ball hits the bottom frame
   } else if (y + dy > canvas.height-ballRadius) {
-      alert("GAME OVER");
-      document.location.reload();
-    }
+      if (x > paddleX && x < paddleX + paddleWidth) {
+        dy = -dy;
+      }
+      else {
+        alert("GAME OVER");
+        document.location.reload();
+      }
+  }
   // Right and Left Borders
   if (x + dx >= 295 || x + dx < ballRadius) {
    // This replicates the movement but in the opposite direction
