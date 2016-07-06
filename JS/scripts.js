@@ -39,7 +39,7 @@ function keyUpHandler(e) {
 function start() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw, 20);
+  setInterval(draw, 10);
 }
 
 function drawBall() {
@@ -66,8 +66,19 @@ function drawPaddle() {
 function drawScore() {
   context.beginPath();
   context.font = "48px serif";
-  context.fillStyle = "#67657F";
+  context.fillStyle = "#A5A3CB";
   context.fillText(score, 10, 50);
+  context.fill();
+  context.closePath();
+}
+
+function drawHS() {
+  context.beginPath();
+  context.font = "20px serif";
+  context.fillStyle = "#A5A3CB";
+  context.strokeText("High Score", 200, 25);
+  // local.Storage.getItem() = Retrieves the value from .setItem
+  context.fillText(localStorage.getItem("highScore"), 250, 50);
   context.fill();
   context.closePath();
 }
@@ -75,6 +86,7 @@ function drawScore() {
 function draw() {
   // ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
   context.clearRect(0, 0, canvas.width, canvas.height);
+  drawHS();
   drawScore();
   drawBall();
   drawPaddle();
@@ -94,6 +106,8 @@ function draw() {
       }
       else {
         alert("GAME OVER");
+        // localStorage.setItem() = This will create the value and add it as storage OR update the KEY value (this will be sent to the .getItem))
+        localStorage.setItem("highScore", score);
         document.location.reload();
       }
   }
