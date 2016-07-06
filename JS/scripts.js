@@ -1,12 +1,37 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-
-var context;
-var x = 50;
-var y = 25;
+var x = canvas.width/2;
+var y = canvas.height-30;
 var dx = 2;
 var dy = -2;
 var ballRadius = 10;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width-paddleWidth/2)
+var rightPressed = false;
+var leftPressed = false;
+
+// Listens to key pressed Left and Right
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  }
+  else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  }
+  else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
 
 function init() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
@@ -26,29 +51,47 @@ function drawBall() {
   context.closePath();
 }
 
+function drawPaddle() {
+  context.beginPath();
+// ctx.rect(x, y, width, height) = creates a path for a rectangle at position (x, y) with a size that is determined by width and height
+  context.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+  context.fillStyle = "grey";
+  context.fill();
+  context.closePath();
+}
+
 function draw() {
   // ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
-  context.clearRect(0, 0, 300, 400);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
+  drawPaddle();
+
+// Boundery Logic
+  // Top and Bottom Borders
   if (y + dy < ballRadius || y + dy > 395) {
+  // This replicates the movement but in the opposite direction
     dy = -dy;
+      // GOING TO ADD THIS IN THE END
    // if (y + dy > 395) {
    //    window.alert("Hello");
    //  }
   };
+  // Right and Left Borders
   if (x + dx >= 295 || x + dx < ballRadius) {
+   // This replicates the movement but in the opposite direction
     dx = -dx;
   };
+// Paddle moving logic
+  if (rightPressed && paddleX < canvas.width-paddleWidth) {
+    paddleX += 7;
+  }
+  else if (leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+
   x += dx;
   y += dy;
 }
-
-  // Boundary Logic
-//
-// if (x < 10 || x > 290) dx = -dx;
-// if (y < 10 || y > 390) dy = -dy;
-
-// }
 
 // when the DOM is loaded, run the init function
 $(document).ready(function(){
@@ -62,37 +105,3 @@ button.on('click', function(e){
   var bgcanvas = $("#myCanvas")
   bgcanvas.css("background", "#457F2C")
 });
-
-
-
-
-// var dx= 4;
-// var dy=4;
-// var y=150;
-// var x=10;
-// function draw(){
-//   context= myCanvas.getContext('2d');
-//   context.clearRect(0,0,300,400);
-//   context.beginPath();
-//   context.fillStyle="#0000ff";
-//   context.arc(x,y,20,0,Math.PI*2,true);
-//   context.closePath();
-//   context.fill();
-//   if( x<0 || x>280)
-//   dx=-dx;
-//   if( y<0 || y>380)
-//     dy=-dy;
-//     x+=dx;
-//     y+=dy;
-//   }
-// setInterval(draw,10);
-
-
-// ctx.beginPath();
-// ctx.moveTo(10,10);
-// ctx.lineWidth = 15;
-// ctx.lineCap = "round";
-// ctx.lineTo(100,100);
-// ctx.stroke()
-
-
