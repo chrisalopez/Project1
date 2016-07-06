@@ -10,6 +10,7 @@ var paddleWidth = 75;
 var paddleX = (canvas.width-paddleWidth/2)
 var rightPressed = false;
 var leftPressed = false;
+var score = 0;
 
 // Listens to key pressed Left and Right
 document.addEventListener("keydown", keyDownHandler, false);
@@ -36,7 +37,7 @@ function keyUpHandler(e) {
 function init() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw, 30);
+  setInterval(draw, 10);
 }
 
 function drawBall() {
