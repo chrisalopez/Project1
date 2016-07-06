@@ -11,7 +11,7 @@ var paddleX = (canvas.width-paddleWidth/2)
 var rightPressed = false;
 var leftPressed = false;
 var score = 0;
-var colors = ["#007F10", "aqua", "#000", "#000DFF", "#FFF", "pink"]
+var colors = ["#4B7F4F", "aqua", "#7F5747", "#447F4A", "#FFF", "pink", "#8CCBC3"]
 
 // Listens to key pressed Left and Right
 // target.addEventListener(type, listener[, options/useCapture])
@@ -36,10 +36,10 @@ function keyUpHandler(e) {
   }
 }
 
-function init() {
+function start() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw, 10);
+  setInterval(draw, 20);
 }
 
 function drawBall() {
@@ -58,7 +58,16 @@ function drawPaddle() {
   context.beginPath();
 // ctx.rect(x, y, width, height) = creates a path for a rectangle at position (x, y) with a size that is determined by width and height
   context.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-  context.fillStyle = "rgba(8, 85, 178, .5)";
+  context.fillStyle = "rgba(8, 85, 178, .8)";
+  context.fill();
+  context.closePath();
+}
+
+function drawScore() {
+  context.beginPath();
+  context.font = "48px serif";
+  context.fillStyle = "#67657F";
+  context.fillText(score, 10, 50);
   context.fill();
   context.closePath();
 }
@@ -66,8 +75,10 @@ function drawPaddle() {
 function draw() {
   // ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
   context.clearRect(0, 0, canvas.width, canvas.height);
+  drawScore();
   drawBall();
   drawPaddle();
+
 
 // Boundery Logic
   // Top Border Only
@@ -75,9 +86,11 @@ function draw() {
   // This replicates the movement but in the opposite direction
     dy = -dy;
       // This indicates "Game Over" when ball hits the bottom frame
-  } else if (y + dy > canvas.height-ballRadius) {
-      if (x > paddleX && x < paddleX + paddleWidth) {
+// Paddle hitting ball Logic
+  } else if (y + dy > canvas.height - ballRadius - paddleHeight) {
+      if (x > paddleX - ballRadius*2 && x < paddleX + paddleWidth + ballRadius*2) {
         dy = -dy;
+        score++;
       }
       else {
         alert("GAME OVER");
@@ -102,9 +115,11 @@ function draw() {
 }
 
 // when the DOM is loaded, run the init function
-$(document).ready(function(){
-  init();
-})
+var startGame = $("#start")
+startGame.on('click', function(e) {
+  start();
+  /* Act on the event */
+});
 
 var button = $("#colorbutton")
 button.on('click', function(e){
