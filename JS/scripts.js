@@ -67,15 +67,15 @@ function draw() {
   drawPaddle();
 
 // Boundery Logic
-  // Top and Bottom Borders
-  if (y + dy < ballRadius || y + dy > 395) {
+  // Top Border Only
+  if (y + dy < ballRadius) {
   // This replicates the movement but in the opposite direction
     dy = -dy;
-      // GOING TO ADD THIS IN THE END
-   // if (y + dy > 395) {
-   //    window.alert("Hello");
-   //  }
-  };
+      // This indicates "Game Over" when ball hits the bottom frame
+  } else if (y + dy > canvas.height-ballRadius) {
+      alert("GAME OVER");
+      document.location.reload();
+    }
   // Right and Left Borders
   if (x + dx >= 295 || x + dx < ballRadius) {
    // This replicates the movement but in the opposite direction
