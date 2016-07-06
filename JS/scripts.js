@@ -11,8 +11,10 @@ var paddleX = (canvas.width-paddleWidth/2)
 var rightPressed = false;
 var leftPressed = false;
 var score = 0;
+var colors = ["#007F10", "aqua", "#000", "#000DFF", "#FFF", "pink"]
 
 // Listens to key pressed Left and Right
+// target.addEventListener(type, listener[, options/useCapture])
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -56,7 +58,7 @@ function drawPaddle() {
   context.beginPath();
 // ctx.rect(x, y, width, height) = creates a path for a rectangle at position (x, y) with a size that is determined by width and height
   context.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-  context.fillStyle = "grey";
+  context.fillStyle = "rgba(8, 85, 178, .5)";
   context.fill();
   context.closePath();
 }
@@ -109,5 +111,9 @@ button.on('click', function(e){
 // Need to target the canvas
 // Need jQuery to change the background of the canvas
   var bgcanvas = $("#myCanvas")
-  bgcanvas.css("background", "#457F2C")
+  // Math.floor() = returns the largest integer less than or equal to a given number.
+  // Math.random() = returns a floating-point, pseudo-random number in the range.
+  var rand = colors[Math.floor(Math.random() * colors.length)]
+  // style property to set one or more CSS properties for every matched element.
+  bgcanvas.css("background", rand)
 });
