@@ -41,7 +41,7 @@ function keyUpHandler(e) {
 function start() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw, 10);
+  setInterval(draw, 20);
 }
 
 function drawBall() {
@@ -95,14 +95,20 @@ function draw() {
 
 
 // Boundery Logic
-  // Top Border Only
-  if (y + dy < ballRadius) {
+  // Right and Left Borders
+  if (x + dx >= 295 || x + dx < ballRadius) {
+   // This replicates the movement but in the opposite direction
+    dx = -dx;
+  };
+
+// Top Border Only
+  if (y + dy <= ballRadius) {
   // This replicates the movement but in the opposite direction
     dy = -dy;
       // This indicates "Game Over" when ball hits the bottom frame
 // Paddle hitting ball Logic
   } else if (y + dy > canvas.height - ballRadius - paddleHeight) {
-      if (x > paddleX - ballRadius*2 && x < paddleX + paddleWidth + ballRadius*2) {
+      if (x > paddleX - ballRadius*2 && x < paddleX + paddleWidth + ballRadius) {
         dy = -dy;
         score++;
       }
@@ -113,11 +119,7 @@ function draw() {
         document.location.reload();
       }
   }
-  // Right and Left Borders
-  if (x + dx >= 295 || x + dx < ballRadius) {
-   // This replicates the movement but in the opposite direction
-    dx = -dx;
-  };
+
 // Paddle moving logic
   if (rightPressed && paddleX < canvas.width-paddleWidth) {
     paddleX += 7;
