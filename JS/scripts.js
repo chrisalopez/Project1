@@ -119,7 +119,13 @@ function draw() {
       else {
         // This indicates "Game Over" when ball hits the bottom frame.
         gameOver = true;
+        if (score > localStorage.getItem("highScore")) {
+          localStorage.setItem("highScore", score)
+
+      }
         $("#pop").show('slow/200/fast', function() {
+          var text = $("#yourscore")
+          text.text("Your Score = " + score);
           var gg = $("#gg")
           gg.on('click', function(e) {
             gameOver = false;
@@ -129,7 +135,7 @@ function draw() {
           });
         });
         // localStorage.setItem() = This will create the value and add it as storage OR update the KEY value (this will be sent to the .getItem))
-        localStorage.setItem("highScore", score);
+        // localStorage.setItem("highScore", score);
         // document.location.reload();
       }
   }
