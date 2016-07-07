@@ -11,6 +11,8 @@ var paddleX = (canvas.width-paddleWidth/2)
 var rightPressed = false;
 var leftPressed = false;
 var score = 0;
+var gameStart = true;
+var gameOver = false;
 var colors = ["#4B7F4F", "#7F5747", "#447F9D", "#A39984", "#FFF", "#000"]
 
 // Listens to key pressed Left and Right
@@ -86,6 +88,9 @@ function drawHS() {
 }
 
 function draw() {
+  if (gameOver) {
+    return false;
+  }
   // ctx.clearReact(x, y, width, height); = Sets all pixels in the rectangle defined by starting point (x, y) and size (width, height) to transparent black, erasing any previously drawn content.
   context.clearRect(0, 0, canvas.width, canvas.height);
   drawHS();
@@ -112,11 +117,20 @@ function draw() {
         score++;
       }
       else {
-        // This indicates "Game Over" when ball hits the bottom frame
-        alert("GAME OVER");
+        // This indicates "Game Over" when ball hits the bottom frame.
+        gameOver = true;
+        $("#pop").show('slow/200/fast', function() {
+          var gg = $("#gg")
+          gg.on('click', function(e) {
+            gameOver = false;
+            document.location.reload();
+            start();
+            /* Act on the event */
+          });
+        });
         // localStorage.setItem() = This will create the value and add it as storage OR update the KEY value (this will be sent to the .getItem))
         localStorage.setItem("highScore", score);
-        document.location.reload();
+        // document.location.reload();
       }
   }
 
@@ -130,7 +144,7 @@ function draw() {
 // This makes the ball appear as it is moving.
   x += dx;
   y += dy;
-}
+};
 
 // when the DOM is loaded, run the init function
 var startGame = $("#start")
