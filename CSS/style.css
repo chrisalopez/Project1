@@ -1,7 +1,11 @@
+h1 {
+  text-align: center;
+}
 #myCanvas  {
   border: 2px solid grey;
   padding: 0px;
   width: 30%;
+  margin: 5% 35%;
 }
 #pop {
   position: absolute;
@@ -10,9 +14,5 @@
   width: 50%;
   height: 25%;
   text-align: center;
-  background: rgba(163, 153, 132, .2);
-}
-
-#gg {
-      margin-top: 10%;
+  background: rgba(163, 153, 132, .5);
 }

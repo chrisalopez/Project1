@@ -121,7 +121,6 @@ function draw() {
         gameOver = true;
         if (score > localStorage.getItem("highScore")) {
           localStorage.setItem("highScore", score)
-
       }
         $("#pop").show('slow/200/fast', function() {
           var text = $("#yourscore")
