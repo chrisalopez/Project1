@@ -95,16 +95,16 @@ function draw() {
 
 
 // Boundery Logic
-  // Right and Left Borders
+  // Right and Left Borders accordingly
   if (x + dx >= canvas.width - ballRadius/2 || x + dx < ballRadius/2) {
    // This replicates the movement but in the opposite direction
     dx = -dx;
   };
 // Top Border Only
-  if (y + dy <= ballRadius) {
+  if (y + dy <= ballRadius/2) {
   // This replicates the movement but in the opposite direction
     dy = -dy;
-      // This indicates "Game Over" when ball hits the bottom frame
+
 // Paddle hitting ball Logic
   } else if (y + dy > canvas.height - ballRadius - paddleHeight) {
       if (x > paddleX - ballRadius*2 && x < paddleX + paddleWidth + ballRadius) {
@@ -112,6 +112,7 @@ function draw() {
         score++;
       }
       else {
+        // This indicates "Game Over" when ball hits the bottom frame
         alert("GAME OVER");
         // localStorage.setItem() = This will create the value and add it as storage OR update the KEY value (this will be sent to the .getItem))
         localStorage.setItem("highScore", score);
