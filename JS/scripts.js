@@ -1,17 +1,17 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var x = canvas.width/2;
-var y = canvas.height-30;
+var y = canvas.height - 30;
 var dx = 2;
 var dy = -2;
 var ballRadius = 10;
 var paddleHeight = 10;
-var paddleWidth = 75;
+var paddleWidth = 60;
 var paddleX = (canvas.width-paddleWidth/2)
 var rightPressed = false;
 var leftPressed = false;
 var score = 0;
-var colors = ["#4B7F4F", "aqua", "#7F5747", "#447F4A", "#FFF", "pink", "#8CCBC3"]
+var colors = ["#4B7F4F", "#7F5747", "#447F9D", "#A39984", "#FFF", "#000"]
 
 // Listens to key pressed Left and Right
 // target.addEventListener(type, listener[, options/useCapture])
@@ -36,6 +36,8 @@ function keyUpHandler(e) {
   }
 }
 
+
+
 function start() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
@@ -48,7 +50,7 @@ function drawBall() {
 // ctx.arc (x, y, radius, startAngle, endAngle, anticlockwise) = DRAWS A CIRCLE!
 // Math.PI = Ratio of the circumference of a circle to its diameter, approximately 3.14159
   context.arc(x, y, ballRadius, 0, Math.PI * 2);
-  context.fillStyle = "#8AFF57";
+  context.fillStyle = "#7BCB59";
   context.fill();
 // ctx.closePath() = causes the point of the pen to move back to the start of the current sub-path aka - beginPath()
   context.closePath();
@@ -123,7 +125,7 @@ function draw() {
   else if (leftPressed && paddleX > 0) {
     paddleX -= 7;
   }
-
+// This makes the ball appear as it is moving.
   x += dx;
   y += dy;
 }
