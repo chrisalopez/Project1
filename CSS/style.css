@@ -4,7 +4,15 @@
   width: 30%;
 }
 #pop {
-  width: 100px;
-  height: 100px;
+  position: absolute;
+  left: 25%;
+  top: 30%;
+  width: 50%;
+  height: 25%;
+  text-align: center;
   background: rgba(163, 153, 132, .2);
+}
+
+#gg {
+      margin-top: 15%;
 }
