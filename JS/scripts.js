@@ -96,11 +96,10 @@ function draw() {
 
 // Boundery Logic
   // Right and Left Borders
-  if (x + dx >= 295 || x + dx < ballRadius) {
+  if (x + dx >= canvas.width - ballRadius/2 || x + dx < ballRadius/2) {
    // This replicates the movement but in the opposite direction
     dx = -dx;
   };
-
 // Top Border Only
   if (y + dy <= ballRadius) {
   // This replicates the movement but in the opposite direction
