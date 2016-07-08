@@ -36,7 +36,14 @@ h1 {
   background: rgba(163, 153, 132, .5);
 }
 #colorbutton {
-    margin-left: 47.5%;
-    font-size: 15px;
-    color: magenta;
+  margin-left: 47.5%;
+  font-size: 15px;
+  color: magenta;
+}
+#bye {
+  background: url(http://www.tripurple.org/wp-content/uploads/2014/04/Red_Brick_Wall.jpg);
+  background-size: cover;
+  color: rgba(115, 0, 0, 0.73);
+  height: 70px;
+  margin-bottom: auto;
 }
