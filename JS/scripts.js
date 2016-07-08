@@ -43,7 +43,7 @@ function keyUpHandler(e) {
 function start() {
 // getContext(ctxType, ctxAttributes) = returns a drawing context on the canvas. Creates an object representing a two-dimensional rendering context.
   context = myCanvas.getContext('2d');
-  setInterval(draw, 20);
+  setInterval(draw, 10);
 }
 
 function drawBall() {
